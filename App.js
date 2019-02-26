@@ -4,7 +4,7 @@ import * as React from 'react';
 import {
   StyleSheet,
   ScrollView,
-  KeyboardAvoidingView,
+  KeyboardAvoidingView, Platform
 } from 'react-native';
 import { TextInput, Button} from 'react-native-paper';
 
@@ -17,7 +17,7 @@ export default class App extends React.Component {
     lastName:'',
     phone:'',
     email:'',
-    state:'',
+    states:'',
     password:'',
     repeatPassword:'',
   };
@@ -27,7 +27,7 @@ export default class App extends React.Component {
     return (
       <KeyboardAvoidingView
         style={styles.wrapper}
-        behavior="padding"
+        behavior={Platform.OS === 'ios' ? "padding" : null}
         keyboardVerticalOffset={80}
       >
         <ScrollView
@@ -77,7 +77,7 @@ export default class App extends React.Component {
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
             ref={(input) => { this.email = input; }}
-            onSubmitEditing={() => { this.state.focus() }}
+            onSubmitEditing={() => { this.states.focus() }}
             returnKeyType={"next"}
             blurOnSubmit={false}
             
@@ -87,10 +87,10 @@ export default class App extends React.Component {
             style={styles.inputContainerStyle}
             label="State"
             placeholder="Type State"
-            value={this.state.state}
-            onChangeText={state => this.setState({ state })}
-            ref={(input) => { this.state = input; }}
-            onSubmitEditing={() => { this.state.password() }}
+            value={this.state.states}
+            onChangeText={states => this.setState({ states })}
+            ref={(input) => { this.states = input; }}
+            onSubmitEditing={() => { this.password.focus() }}
             returnKeyType={"next"}
             blurOnSubmit={false}
           />
@@ -103,7 +103,7 @@ export default class App extends React.Component {
             value={this.state.password}
             onChangeText={password => this.setState({ password })}
             ref={(input) => { this.password = input; }}
-            onSubmitEditing={() => { this.state.repeatPassword() }}
+            onSubmitEditing={() => { this.repeatPassword.focus() }}
             returnKeyType={"next"}
             blurOnSubmit={false}
           />
