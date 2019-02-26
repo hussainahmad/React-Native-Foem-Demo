@@ -4,7 +4,7 @@ import * as React from 'react';
 import {
   StyleSheet,
   ScrollView,
-  KeyboardAvoidingView, Platform
+  KeyboardAvoidingView,
 } from 'react-native';
 import { TextInput, Button} from 'react-native-paper';
 
@@ -27,7 +27,7 @@ export default class App extends React.Component {
     return (
       <KeyboardAvoidingView
         style={styles.wrapper}
-        behavior={Platform.OS === 'ios' ? "padding" : null}
+        behavior="padding"
         keyboardVerticalOffset={80}
       >
         <ScrollView
@@ -142,4 +142,3 @@ const styles = StyleSheet.create({
     margin: 8,
   },
 });
-
