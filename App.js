@@ -19,8 +19,28 @@ export default class App extends React.Component {
     email:'',
     states:'',
     password:'',
+    fakePassword:'',
     repeatPassword:'',
+    repeatFakePassword:""
   };
+
+
+  async renderPassword(password, passType) {
+    let pass = password;
+    let fakePass = '';
+    fakePass = pass.replace(/\s|[0-9_A-Za-z]|\W|[#$%^&*()]/g, '*')
+    if (passType === 'pass') {
+      this.setState({
+        password: password,
+        fakePassword: fakePass,
+      });
+    } else if (passType === 'repeatPass') {
+      this.setState({
+        repeatPassword: password,
+        repeatFakePassword: fakePass,
+      });
+    }
+  }
 
   render() {
 
@@ -99,9 +119,9 @@ export default class App extends React.Component {
             style={styles.inputContainerStyle}
             label="Password"
             placeholder="Type Password"
-            secureTextEntry={true}
-            value={this.state.password}
-            onChangeText={password => this.setState({ password })}
+            // secureTextEntry={true}
+            value={this.state.fakePassword}
+            onChangeText={password => this.renderPassword(password, 'pass')}
             ref={(input) => { this.password = input; }}
             onSubmitEditing={() => { this.repeatPassword.focus() }}
             returnKeyType={"next"}
@@ -112,9 +132,9 @@ export default class App extends React.Component {
             style={styles.inputContainerStyle}
             label="Repeat Password"
             placeholder="Type Repeat Password"
-            secureTextEntry={true}
-            value={this.state.repeatPassword}
-            onChangeText={repeatPassword => this.setState({ repeatPassword })}
+            // secureTextEntry={true}
+            value={this.state.repeatFakePassword}
+            onChangeText={repeatPassword => this.renderPassword(repeatPassword, 'repeatPass')}
             ref={(input) => { this.repeatPassword = input; }}
             returnKeyType={"done"}
             blurOnSubmit={true}
