@@ -5,8 +5,9 @@ import {
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
+  TextInput
 } from 'react-native';
-import { TextInput, Button} from 'react-native-paper';
+import { Button} from 'react-native-paper';
 
 
 export default class App extends React.Component {
